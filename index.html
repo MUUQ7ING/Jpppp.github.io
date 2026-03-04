@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jpppp Blog</title>
+    <meta name="description" content="Icarus 风格的简洁个人博客首页" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a class="logo" href="#">Jpppp Blog</a>
+        <nav>
+          <a href="#">首页</a>
+          <a href="#">归档</a>
+          <a href="#">分类</a>
+          <a href="#">标签</a>
+          <a href="#">关于</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container layout">
+      <section class="content-column">
+        <article class="post-card card">
+          <div class="post-meta">2026-03-04 · 技术 · 8 分钟</div>
+          <h2><a href="#">用 Icarus 风格重构个人博客首页</a></h2>
+          <p>
+            这次改版重点是信息层级与阅读节奏：标题突出、元信息弱化、摘要清晰，并通过卡片系统保证视觉一致性。
+          </p>
+          <a class="read-more" href="#">阅读更多 →</a>
+        </article>
+
+        <article class="post-card card">
+          <div class="post-meta">2026-03-01 · 随笔 · 5 分钟</div>
+          <h2><a href="#">为什么我偏爱“轻框架 + 强内容”的博客形式</a></h2>
+          <p>
+            页面应该尽量安静，把注意力还给文字。结构清晰后，内容产出和长期维护都会轻松很多。
+          </p>
+          <a class="read-more" href="#">阅读更多 →</a>
+        </article>
+
+        <article class="post-card card">
+          <div class="post-meta">2026-02-21 · 生活 · 4 分钟</div>
+          <h2><a href="#">留白，不只是视觉风格</a></h2>
+          <p>
+            留白本质是节奏控制：页面给眼睛呼吸空间，写作给思考留余地。少一点堆砌，多一点重点。
+          </p>
+          <a class="read-more" href="#">阅读更多 →</a>
+        </article>
+      </section>
+
+      <aside class="sidebar-column">
+        <section class="card profile-card">
+          <img
+            class="avatar"
+            src="https://api.dicebear.com/9.x/initials/svg?seed=Jpppp"
+            alt="Jpppp avatar"
+          />
+          <h3>Jpppp</h3>
+          <p>开发者 / 写作者</p>
+          <div class="profile-stats">
+            <div><strong>12</strong><span>文章</span></div>
+            <div><strong>7</strong><span>分类</span></div>
+            <div><strong>23</strong><span>标签</span></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h4>分类</h4>
+          <ul class="link-list">
+            <li><a href="#">前端开发</a><span>5</span></li>
+            <li><a href="#">效率工具</a><span>3</span></li>
+            <li><a href="#">生活记录</a><span>4</span></li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h4>标签</h4>
+          <div class="tag-cloud">
+            <a href="#">JavaScript</a>
+            <a href="#">CSS</a>
+            <a href="#">Hexo</a>
+            <a href="#">Icarus</a>
+            <a href="#">写作</a>
+            <a href="#">工具流</a>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <div class="container">© 2026 Jpppp · Powered by static HTML/CSS</div>
+    </footer>
+  </body>
+</html>
