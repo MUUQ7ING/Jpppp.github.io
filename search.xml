@@ -36,31 +36,6 @@ M/tarjan缩点/DAG板板的看懂题面后，我们发现一个环上的学校�
       </tags>
   </entry>
   <entry>
-    <title>Jpppp的学习总结 .week5</title>
-    <url>/2025/03/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/week5/</url>
-    <content><![CDATA[2025.3.24 - 2025.3.30
-
-
-TIL/模拟题目保证了操作次数在以内 因此很好猜出可以进行次操作 使得字符串得到TIL各n个咋操作呢？我们发现如果先插到前面的话，后面序号数都会增大，会变麻烦，因此我们从后往前插就ok了。具体就是弄个栈 节点信息包括当前序号、当前插入的字母、和一个旁边的字母(我选取右边的) 真的只要模拟就好了 
-#include &lt;bits/stdc++.h&gt;#include &lt;cstdlib&gt;#define For(i,a,b) for(int i=a;i&lt;=b;++i)#define foR(i,a,b) for(int i=a;i&gt;=b;--i)using namespace std;#define int long longconst int N=167;int n,ans[N*2],cnt;string s;struct Node{    int p;    char ch;    char lf;}hh;char nx(char x,char y){    if(x=='T'&amp;&amp;y=='I')return 'L';    if(x=='I'&amp;&amp;y=='T')return 'L';    if(x=='T'&amp;&amp;y=='L')return 'I';    if(x=='L'&amp;&amp;y=='T')return 'I';    if(x=='I'&amp;&amp;y=='L')return 'T';    if(x=='L'&amp;&amp;y=='I')return 'T';}stack&lt;Node&gt;q;void qwq(Node x){    Node y;    y=x; swap(y.ch,y.lf);    q.push(y);    y=x; y.p++; y.ch=nx(x.ch,x.lf); y.lf=x.lf;    q.push(y);    return ;}void OwO(int a,int b,int c,char A,char B,char C){    while(1){        Node x=q.top();q.pop();        if(x.ch==B&amp;&amp;b&lt;a){            ans[++cnt]=x.p;            b++; qwq(x);        }        if(x.ch==C&amp;&amp;c&lt;a){            ans[++cnt]=x.p;            c++; qwq(x);        }        if(x.ch==A&amp;&amp;a&lt;n){            ans[++cnt]=x.p;            a++; qwq(x);        }        if(a==b&amp;&amp;a==c)break;        if(q.empty())break;        if(cnt==2*n)break;    }    if(a==b&amp;&amp;a==c){        cout&lt;&lt;cnt&lt;&lt;endl;        For(i,1,cnt){            cout&lt;&lt;ans[i]&lt;&lt;endl;        }        return ;    }    else{        cout&lt;&lt;"-1\n";        return ;    }}void solve(){    cin&gt;&gt;n;    cin&gt;&gt;s;s='!'+s;    int a,b,c;    cnt=0;a=0;b=0;c=0;    while(!q.empty())q.pop();    For(i,1,n){        if(s[i]=='T')a++;        if(s[i]=='I')b++;        if(s[i]=='L')c++;        if(s[i]!=s[i+1]&amp;&amp;i!=n){            q.push({i,nx(s[i],s[i+1]),s[i+1]});        }    }    if(a==n||b==n||c==n){        cout&lt;&lt;-1&lt;&lt;endl;        return;    }    if(a&gt;=b&amp;&amp;a&gt;=c){        OwO(a,b,c,'T','I','L');return ;    }    if(b&gt;=a&amp;&amp;b&gt;=c){        OwO(b,a,c,'I','T','L');return ;    }    if(c&gt;=a&amp;&amp;c&gt;=b){        OwO(c,a,b,'L','T','I');return ;    }}signed main(){    ios::sync_with_stdio(0);    cin.tie(0),cout.tie(0);    int T;    cin&gt;&gt;T;    while(T--){        solve();    }    return 0;}
-ps:一开始没优化结构 bro打了190多行（嘻嘻
-莫队本以为是莫队 但其实还有超简便的做法注意到一个数可能对一个询问产生贡献的必要条件的是其出现过至少次，这样的数不超过个，对于每个这样的数记出现次数的前缀和，对于询问暴力枚举所有这样的数并通过前缀和查询该数的出现次数即可。
-signed main(){    read(n);read(m);    For(i,1,n){        read(x);a[i]=x;        if(x&lt;=n)cnt[x]++;    }    For(i,1,n){        if(cnt[i]&gt;=i)val[++tot]=i;    }    For(i,1,tot){        For(j,1,n){            sum[i][j]=sum[i][j-1];            if(a[j]==val[i])sum[i][j]++;                    }    }    while(m--){        read(l);read(r);        ans=0;        For(j,1,min(tot,r-l+1)){            if(sum[j][r]-sum[j][l-1] == val[j])ans++;            if(val[j]&gt;r-l+1)break;        }        printf("%d\n",ans);    }}
-div3sb题我不会放过你的没考虑直接推式子 而是用普通的循环结构 结果居然被hack了TT
-
-
-因为x尽可能小设t，使得那么t+1后 所以得到 x=t=m/(m-n+1)
-void solve(){    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;    n = (k+n-1)/n ;    // ans=n;    // int x=1;    // while(1){    //     int t=m/(x+1);    //     int now = m-t;    //     if(now &gt;= n){    //         ans=x;    //         break;    //     }    //     x=m/t;    // }    ans = (m)/(m-n+1) ;    cout&lt;&lt;ans&lt;&lt;endl;}]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>Algorithm</tag>
-        <tag>Learning</tag>
-        <tag>Summary</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jpppp的学习总结 .week4</title>
     <url>/2025/03/23/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/week4/</url>
     <content><![CDATA[2025.3.17 - 2025.3.23
@@ -149,6 +124,40 @@ bool R(){    bool f=0;    For(i,1,n){        int cnt=0,hh=0,hm=0;;        For(j,
       </tags>
   </entry>
   <entry>
+    <title>Jpppp的学习总结 .week5</title>
+    <url>/2025/03/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/week5/</url>
+    <content><![CDATA[2025.3.24 - 2025.3.30
+
+
+TIL/模拟题目保证了操作次数在以内 因此很好猜出可以进行次操作 使得字符串得到TIL各n个咋操作呢？我们发现如果先插到前面的话，后面序号数都会增大，会变麻烦，因此我们从后往前插就ok了。具体就是弄个栈 节点信息包括当前序号、当前插入的字母、和一个旁边的字母(我选取右边的) 真的只要模拟就好了 
+#include &lt;bits/stdc++.h&gt;#include &lt;cstdlib&gt;#define For(i,a,b) for(int i=a;i&lt;=b;++i)#define foR(i,a,b) for(int i=a;i&gt;=b;--i)using namespace std;#define int long longconst int N=167;int n,ans[N*2],cnt;string s;struct Node{    int p;    char ch;    char lf;}hh;char nx(char x,char y){    if(x=='T'&amp;&amp;y=='I')return 'L';    if(x=='I'&amp;&amp;y=='T')return 'L';    if(x=='T'&amp;&amp;y=='L')return 'I';    if(x=='L'&amp;&amp;y=='T')return 'I';    if(x=='I'&amp;&amp;y=='L')return 'T';    if(x=='L'&amp;&amp;y=='I')return 'T';}stack&lt;Node&gt;q;void qwq(Node x){    Node y;    y=x; swap(y.ch,y.lf);    q.push(y);    y=x; y.p++; y.ch=nx(x.ch,x.lf); y.lf=x.lf;    q.push(y);    return ;}void OwO(int a,int b,int c,char A,char B,char C){    while(1){        Node x=q.top();q.pop();        if(x.ch==B&amp;&amp;b&lt;a){            ans[++cnt]=x.p;            b++; qwq(x);        }        if(x.ch==C&amp;&amp;c&lt;a){            ans[++cnt]=x.p;            c++; qwq(x);        }        if(x.ch==A&amp;&amp;a&lt;n){            ans[++cnt]=x.p;            a++; qwq(x);        }        if(a==b&amp;&amp;a==c)break;        if(q.empty())break;        if(cnt==2*n)break;    }    if(a==b&amp;&amp;a==c){        cout&lt;&lt;cnt&lt;&lt;endl;        For(i,1,cnt){            cout&lt;&lt;ans[i]&lt;&lt;endl;        }        return ;    }    else{        cout&lt;&lt;"-1\n";        return ;    }}void solve(){    cin&gt;&gt;n;    cin&gt;&gt;s;s='!'+s;    int a,b,c;    cnt=0;a=0;b=0;c=0;    while(!q.empty())q.pop();    For(i,1,n){        if(s[i]=='T')a++;        if(s[i]=='I')b++;        if(s[i]=='L')c++;        if(s[i]!=s[i+1]&amp;&amp;i!=n){            q.push({i,nx(s[i],s[i+1]),s[i+1]});        }    }    if(a==n||b==n||c==n){        cout&lt;&lt;-1&lt;&lt;endl;        return;    }    if(a&gt;=b&amp;&amp;a&gt;=c){        OwO(a,b,c,'T','I','L');return ;    }    if(b&gt;=a&amp;&amp;b&gt;=c){        OwO(b,a,c,'I','T','L');return ;    }    if(c&gt;=a&amp;&amp;c&gt;=b){        OwO(c,a,b,'L','T','I');return ;    }}signed main(){    ios::sync_with_stdio(0);    cin.tie(0),cout.tie(0);    int T;    cin&gt;&gt;T;    while(T--){        solve();    }    return 0;}
+ps:一开始没优化结构 bro打了190多行（嘻嘻
+莫队本以为是莫队 但其实还有超简便的做法注意到一个数可能对一个询问产生贡献的必要条件的是其出现过至少次，这样的数不超过个，对于每个这样的数记出现次数的前缀和，对于询问暴力枚举所有这样的数并通过前缀和查询该数的出现次数即可。
+signed main(){    read(n);read(m);    For(i,1,n){        read(x);a[i]=x;        if(x&lt;=n)cnt[x]++;    }    For(i,1,n){        if(cnt[i]&gt;=i)val[++tot]=i;    }    For(i,1,tot){        For(j,1,n){            sum[i][j]=sum[i][j-1];            if(a[j]==val[i])sum[i][j]++;                    }    }    while(m--){        read(l);read(r);        ans=0;        For(j,1,min(tot,r-l+1)){            if(sum[j][r]-sum[j][l-1] == val[j])ans++;            if(val[j]&gt;r-l+1)break;        }        printf("%d\n",ans);    }}
+div3sb题我不会放过你的没考虑直接推式子 而是用普通的循环结构 结果居然被hack了TT
+
+
+因为x尽可能小设t，使得那么t+1后 所以得到 x=t=m/(m-n+1)
+void solve(){    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;    n = (k+n-1)/n ;    // ans=n;    // int x=1;    // while(1){    //     int t=m/(x+1);    //     int now = m-t;    //     if(now &gt;= n){    //         ans=x;    //         break;    //     }    //     x=m/t;    // }    ans = (m)/(m-n+1) ;    cout&lt;&lt;ans&lt;&lt;endl;}]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Learning</tag>
+        <tag>Summary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>The First Blog</title>
+    <url>/2025/03/10/%E6%B5%8B%E8%AF%95/The-First-Blog/</url>
+    <content><![CDATA[The First BlogHello!I’m J:P
+]]></content>
+      <categories>
+        <category>test</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Anniversary, Nurture, and Life</title>
     <url>/2026/04/23/%E6%96%87%E5%AD%97/nurture/</url>
     <content><![CDATA[在某个炎热的午休，不记得空调是否断电，我蜷缩着身体在那间逼仄的、挤满了课桌与装书的箱子的狭小教室的后排角落，恶补着课上听不懂的化学，戴着蓝牙耳机，用诺基亚播放着下载到储存卡里的nurture——我不会想到转瞬已是当下。
@@ -168,14 +177,5 @@ bool R(){    bool f=0;    For(i,1,n){        int cnt=0,hh=0,hm=0;;        For(j,
         <tag>Daily</tag>
         <tag>Life</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>The First Blog</title>
-    <url>/2025/03/10/%E6%B5%8B%E8%AF%95/The-First-Blog/</url>
-    <content><![CDATA[The First BlogHello!I’m J:P
-]]></content>
-      <categories>
-        <category>test</category>
-      </categories>
   </entry>
 </search>
