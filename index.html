@@ -339,10 +339,24 @@ mjx-container[display="true"] + br {
     </style>
     <div class="home-banner-background transition-fade fixed top-0 left-0 w-screen h-screen box-border will-change-transform bg-white dark:bg-black flex justify-center items-center">
         
-            <video src="/images/cfg/bg-animation.webm" autoplay loop muted playsinline class="banner-media-scaled dark:hidden"></video>
+        <!-- PC Light -->
         
+            <video src="/images/cfg/bg-animation.webm" autoplay loop muted playsinline class="banner-media-scaled hidden sm:block dark:hidden"></video>
         
-            <img src="/images/cfg/bg2.png" alt="home-banner-background" class="w-full h-full object-cover hidden dark:block">
+
+        <!-- Mobile Light -->
+        
+            <video src="/images/cfg/bg-animation.webm" autoplay loop muted playsinline class="w-full h-full object-cover block sm:hidden dark:hidden"></video>
+        
+
+        <!-- PC Dark -->
+        
+            <img src="/images/cfg/bg2.png" alt="home-banner-background" class="w-full h-full object-cover hidden sm:dark:block">
+        
+
+        <!-- Mobile Dark -->
+        
+            <img src="/images/cfg/mbg2.png" alt="home-banner-background" class="w-full h-full object-cover hidden dark:block sm:dark:hidden">
         
     </div>
 
