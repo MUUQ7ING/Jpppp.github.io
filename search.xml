@@ -1,8 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Jpppp的学习总结 .week3</title>
+    <url>/2025/03/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/week3/</url>
+    <content><![CDATA[2025.3.10 - 2025.3.16
+
+
+构造的题
+
+ 对于所有的 .
+ 两两不同.
+.已知个数 需要求得未知的数我们将第三个式子进行移项 便可得：.左边共项 右边共项 再次移动 得：.左边项正，项负 分给等式左边2n个数，正项到负项从大到小设最大项为 除去这项后左边仍有n个正n个负，因为正项均比负项大，总和得到正数，再加上，因此便是比已知的2n个数都大的数，因此不同便保证了
+
+贪贪的题贪心策略就是搞一个添加值变量 每次优先去x 并且要x大的 如果都+或都x相同 就把添加值继续保留本题贪心的障碍就在 如果前面是+ x 后面是x + 那还能不能那样贪心
+xn +m  ^+i xj  |
+设我们左边和右边的固定人数和添加人数分别为、和、那我们贪心地先往右 我们的右边就能得到新的的添加人数那这些添加人数到时候又能往左去 
+交互的题/010101的题就是玩 搞搞每一位|1 |0 然后再相加 会产生什么结果（包括进位什么的）然后就搞出来0101010101和1010101010两种玩法 豪丸以及还学到搞交互题的优美姿势 因此贴一下代码
+int ask(int x){    cout&lt;&lt; x &lt;&lt; endl;    fflush(stdout);    int ans;    cin &gt;&gt; ans;    return ans;}int getm(){    cout &lt;&lt; "!" &lt;&lt; endl;    fflush(stdout);    int m;    cin &gt;&gt; m ;    return m ;}void Print(int m){    cout &lt;&lt; m &lt;&lt; endl;     fflush(stdout);    return ;}void solve(){    int a=0,b=0,p[33],ans=0;    memset(p,0,sizeof(p));    For( i , 1 , 30 ){        a &lt;&lt;= 1;        b &lt;&lt;= 1;        if( i % 2 ) a = a + 1;        else b = b + 1;    }    int  x = ask ( a ) ; // a=010101    int  y = ask ( b ) ; // b=101010    For( i , 1 , 30 )    {        int now = 0, o ;        o = (i%2) ? x : y ;        if( ( o &amp; (1 &lt;&lt; ( i-1 ) ) ) )  now = 1;        if( ( o &amp; (1 &lt;&lt; ( i ) ) ) )  now = now + (1&lt;&lt;1);        // printf("? %d %d\n",i, (now));        if( i == 1 )now++;        if( now == 1 ) p[i] = 0;        if( now == 2 ) p[i] = 1;        if( now == 3 ) p[i] = 2;        // cout&lt;&lt;"!!  "&lt;&lt;i&lt;&lt;"  "&lt;&lt;p[i]&lt;&lt;endl;    }    int m = getm();    For( i , 1 , 30 ){        int now = 1 &lt;&lt; ( i-1 ) ;        if( (now &amp; m) ) {            ans += ( 1 &lt;&lt; ( i ) );        }        else {            if( p[i] == 0 ) ;            if( p[i] == 1 ) ans += (1 &lt;&lt; (i-1) );            if( p[i] == 2 ) ans += (1 &lt;&lt; (i) );        }    }    Print(ans);    return ;}
+
+建图、连边、与迪杰斯特拉这种问题把每个节点乘上四种方向状态 再接着连边 就十分的优美
+周训环节A/暴力脑子太混乱一开始读不懂题面 代码写的更是壱驮矢 喜提+6吸取教训 以及要提高代码重构的能力把矢端上来罢 恶心带伙 警醒自己
+bool check(){    int q[11];    memset(q,0,sizeof(q));    if(f[a%10]||f[a/10]||f[b%10]||f[b/10]||f[c%10]||f[c/10])return 0;    For(i,0,s2.size()-1){        if(S[i]!=s1[i]&amp;&amp;s2[i]=='G')return 0;        if(S[i]==s1[i]&amp;&amp;s2[i]!='G')return 0;        q[S[i]-'0']++;    }    For(i,0,9)if(g[i]&amp;&amp;q[i]!=h[i])return 0;    For(i,0,9)if(!g[i]&amp;&amp;(q[i]&lt;h[i]))return 0;    return 1;}void solve(){    For(i,0,s2.size()-1)    if(s2[i]!='B')h[s1[i]-'0']++;    For(i,0,s2.size()-1)    if(s2[i]=='B'&amp;&amp;h[s1[i]-'0']==0)f[s1[i]-'0']=1;    For(i,0,s2.size()-1)    if(s2[i]=='B'&amp;&amp;h[s1[i]-'0']!=0)g[s1[i]-'0']=1;}
+
+M/tarjan缩点/DAG板板的看懂题面后，我们发现一个环上的学校都可以比这环上的学校好，因此可以缩成一个点缩点后是否就可以直接搞呢？我们担心会不会有类似1-&gt;2 1-&gt;3 2-&gt;4 3-&gt;4的情况然鹅 由于我们给的学校排名是每个学校都会有排名的关系，因此不会出现上面这种2和3分支的情况因此所构成的DAG 直接dfs统计排名就好惹
+赛后B/带权并查集/差分约束
+总结做题的时候思路一定要清晰脑子越乱做的越不明白 
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Learning</tag>
+        <tag>Summary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jpppp的学习总结 .week5</title>
+    <url>/2025/03/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/week5/</url>
+    <content><![CDATA[2025.3.24 - 2025.3.30
+
+
+TIL/模拟题目保证了操作次数在以内 因此很好猜出可以进行次操作 使得字符串得到TIL各n个咋操作呢？我们发现如果先插到前面的话，后面序号数都会增大，会变麻烦，因此我们从后往前插就ok了。具体就是弄个栈 节点信息包括当前序号、当前插入的字母、和一个旁边的字母(我选取右边的) 真的只要模拟就好了 
+#include &lt;bits/stdc++.h&gt;#include &lt;cstdlib&gt;#define For(i,a,b) for(int i=a;i&lt;=b;++i)#define foR(i,a,b) for(int i=a;i&gt;=b;--i)using namespace std;#define int long longconst int N=167;int n,ans[N*2],cnt;string s;struct Node{    int p;    char ch;    char lf;}hh;char nx(char x,char y){    if(x=='T'&amp;&amp;y=='I')return 'L';    if(x=='I'&amp;&amp;y=='T')return 'L';    if(x=='T'&amp;&amp;y=='L')return 'I';    if(x=='L'&amp;&amp;y=='T')return 'I';    if(x=='I'&amp;&amp;y=='L')return 'T';    if(x=='L'&amp;&amp;y=='I')return 'T';}stack&lt;Node&gt;q;void qwq(Node x){    Node y;    y=x; swap(y.ch,y.lf);    q.push(y);    y=x; y.p++; y.ch=nx(x.ch,x.lf); y.lf=x.lf;    q.push(y);    return ;}void OwO(int a,int b,int c,char A,char B,char C){    while(1){        Node x=q.top();q.pop();        if(x.ch==B&amp;&amp;b&lt;a){            ans[++cnt]=x.p;            b++; qwq(x);        }        if(x.ch==C&amp;&amp;c&lt;a){            ans[++cnt]=x.p;            c++; qwq(x);        }        if(x.ch==A&amp;&amp;a&lt;n){            ans[++cnt]=x.p;            a++; qwq(x);        }        if(a==b&amp;&amp;a==c)break;        if(q.empty())break;        if(cnt==2*n)break;    }    if(a==b&amp;&amp;a==c){        cout&lt;&lt;cnt&lt;&lt;endl;        For(i,1,cnt){            cout&lt;&lt;ans[i]&lt;&lt;endl;        }        return ;    }    else{        cout&lt;&lt;"-1\n";        return ;    }}void solve(){    cin&gt;&gt;n;    cin&gt;&gt;s;s='!'+s;    int a,b,c;    cnt=0;a=0;b=0;c=0;    while(!q.empty())q.pop();    For(i,1,n){        if(s[i]=='T')a++;        if(s[i]=='I')b++;        if(s[i]=='L')c++;        if(s[i]!=s[i+1]&amp;&amp;i!=n){            q.push({i,nx(s[i],s[i+1]),s[i+1]});        }    }    if(a==n||b==n||c==n){        cout&lt;&lt;-1&lt;&lt;endl;        return;    }    if(a&gt;=b&amp;&amp;a&gt;=c){        OwO(a,b,c,'T','I','L');return ;    }    if(b&gt;=a&amp;&amp;b&gt;=c){        OwO(b,a,c,'I','T','L');return ;    }    if(c&gt;=a&amp;&amp;c&gt;=b){        OwO(c,a,b,'L','T','I');return ;    }}signed main(){    ios::sync_with_stdio(0);    cin.tie(0),cout.tie(0);    int T;    cin&gt;&gt;T;    while(T--){        solve();    }    return 0;}
+ps:一开始没优化结构 bro打了190多行（嘻嘻
+莫队本以为是莫队 但其实还有超简便的做法注意到一个数可能对一个询问产生贡献的必要条件的是其出现过至少次，这样的数不超过个，对于每个这样的数记出现次数的前缀和，对于询问暴力枚举所有这样的数并通过前缀和查询该数的出现次数即可。
+signed main(){    read(n);read(m);    For(i,1,n){        read(x);a[i]=x;        if(x&lt;=n)cnt[x]++;    }    For(i,1,n){        if(cnt[i]&gt;=i)val[++tot]=i;    }    For(i,1,tot){        For(j,1,n){            sum[i][j]=sum[i][j-1];            if(a[j]==val[i])sum[i][j]++;                    }    }    while(m--){        read(l);read(r);        ans=0;        For(j,1,min(tot,r-l+1)){            if(sum[j][r]-sum[j][l-1] == val[j])ans++;            if(val[j]&gt;r-l+1)break;        }        printf("%d\n",ans);    }}
+div3sb题我不会放过你的没考虑直接推式子 而是用普通的循环结构 结果居然被hack了TT
+
+
+因为x尽可能小设t，使得那么t+1后 所以得到 x=t=m/(m-n+1)
+void solve(){    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;    n = (k+n-1)/n ;    // ans=n;    // int x=1;    // while(1){    //     int t=m/(x+1);    //     int now = m-t;    //     if(now &gt;= n){    //         ans=x;    //         break;    //     }    //     x=m/t;    // }    ans = (m)/(m-n+1) ;    cout&lt;&lt;ans&lt;&lt;endl;}]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Learning</tag>
+        <tag>Summary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jpppp的学习总结 .week4</title>
+    <url>/2025/03/23/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/week4/</url>
+    <content><![CDATA[2025.3.17 - 2025.3.23
+
+
+规律/递归表如下
+11 11 0 11 1 1 11 0 0 0 11 1 0 0 1 11 0 1 0 1 0 11 1 1 1 1 1 1 11 0 0 0 0 0 0 0 11 1 0 0 0 0 0 0 1 11 0 1 0 0 0 0 0 1 0 11 1 1 1 0 0 0 0 1 1 1 11 0 0 0 1 0 0 0 1 0 0 0 11 1 0 0 1 1 0 0 1 1 0 0 1 11 0 1 0 1 0 1 0 1 0 1 0 1 0 11 1 1 1 1 1 1 1 1 1 1 1 1 1 1 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 11 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 11 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 11 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 11 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 11 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 11 0 1 0 1 0 1 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 11 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1
+发现第n行是由两段第n-2^x行和一串0构成的因此 递归就被发现惹
+#include&lt;bits/stdc++.h&gt;#include&lt;cstdlib&gt;#define For(i,a,b) for(register int i=a; i&lt;=b;++i)#define foR(i,a,b) for(register int i=a; i&gt;=b;--i)#define int long long#define db long doubleusing namespace std;const int N=2020;int T,n,k,f[505];void print(int x){    if(x==0)return ;    if(x==1){        cout&lt;&lt;k&lt;&lt;" ";        return ;    }    int id=lower_bound(f+1,f+1+32,x)-f-1;    // cout&lt;&lt;"!!!"&lt;&lt;x&lt;&lt;" "&lt;&lt;f[id]&lt;&lt;endl;    print(x-f[id]);    For(i,1,x-(x-f[id])*2)cout&lt;&lt;"0 ";    print(x-f[id]);}signed main(){    std::ios::sync_with_stdio(false);    std::cin.tie(nullptr);    cin&gt;&gt;T;    f[0]=1;    For(i,1,32)f[i]=f[i-1]*2;    while(T--){        cin&gt;&gt;n&gt;&gt;k;        print(n);        cout&lt;&lt;endl;    }}
+
+(x+k)+(y+k)=(x+k)^(y+k)给你两个正整数  和  ().请找出一个非负整数 ,使得  成立, 或者确定这样的整数不存在.
+首先要观察出  究竟意味着什么其实就是X和Y在二进制下每位不全为1然后构造就很容易：假设x&gt;y 那么当我们的k能够让 x+k 凑得二进制下形如10000000的数即最高位再进一位其余位均为零因为y&lt;x 因此y+k无论如何都不会像x+k一样最高位进位而且x的其余位都保证为零了 所以   就可以很显然地成立了
+int solve(){    int x,y,ans=0,k=0;    cin&gt;&gt;x&gt;&gt;y;    if(x==y){        return -1;    }    if(x&lt;y)swap(x,y);    while(x){        if(x%2&amp;&amp;x!=1){            ans += (1&lt;&lt;k);            x+=1;        }        k++;x/=2;    }    return ans;}
+
+树的遍历犯了一个致命错误（在把后序遍历的根节点从中序找出来后自以为是地 认为 中序遍历的 右半部分的第一个节点 就必定和 后序遍历的 右半部分的第一个节点 相同
+int p=0;For(i,l,r-1){    if(a[i]==b[o+1])p=i;}dfs(l,p-1,s,o-1,k+1);dfs(p,r-1,o+1,t,k+1);
+那我简单举个例子 你不就炸了吗^^
+42 4 3 12 1 3 4
+
+所以我是傻逼吗 我既然在中序遍历那部分把左边和右边的大小也都得到了 我在后序遍历不就马上得到了？因此正确代码如下
+#include &lt;bits/stdc++.h&gt;#include &lt;cstdlib&gt;#define For(i,a,b) for(int i=a;i&lt;=b;++i)#define foR(i,a,b) for(int i=a;i&gt;=b;--i)using namespace std;const int N = 33;int n,a[N],b[N],K=0,cnt=0,A[33];vector&lt;int&gt; ans[N];void dfs(int l,int r,int s,int t,int k){ //Hou lr  Zhong st    int o=0;    K=max(K,k);    ans[k].push_back(a[r]);    if(l==r)return ;    // printf("!! %d %d %d %d %d !!\n",l,r,s,t,k);    For(i,s,t){        if(a[r]==b[i])o=i;    }    if(s==o){        dfs(l,r-1,s+1,t,k+1);    }    else if(o==t){        dfs(l,r-1,s,t-1,k+1);    }    else{        dfs(l,l+(o-s)-1,s,o-1,k+1);        dfs(r-(t-o),r-1,o+1,t,k+1);    }}signed main(){    cin&gt;&gt;n;    For(i,1,n)cin&gt;&gt;a[i];    For(i,1,n)cin&gt;&gt;b[i];    dfs(1,n,1,n,1);    For(i,1,K){        for(auto j : ans[i]){            A[++cnt] = j;        }    }    For(i,1,cnt-1) cout&lt;&lt;A[i]&lt;&lt;" ";    cout&lt;&lt;A[cnt];}
+
+ 
+
+因为向下取整 所以 
+ 也就左右
+因为每个k值只能用一次 因此我们可以背包f[i][j]表示 时的最小花费
+然后 当时统计答案就好了
+
+For(i,0,64)For(j,0,64)f[i][j]=inf;    f[0][0]=0;    For(k,0,64){        foR(i,64,0){            foR(j,64,0){                if(i &gt;= k){                    if(f[i][j] == inf)f[i][j] = f[i-k][j] + s[k];//防inf+inf爆炸                    else f[i][j]=min(f[i][j], f[i-k][j] + s[k]);                }                if(j &gt;= k){                    if(f[i][j] == inf)f[i][j] = f[i][j-k] + s[k];                    else f[i][j]=min(f[i][j], f[i][j-k] + s[k]);                }                            }        }    }
+
+新手dp给定一个正整数 n，求将其分解成若干个素数之和的方案总数。
+signed main(){    cin&gt;&gt;n;    ss();    f[0]=1;    For(i,1,cnt){        For(j,p[i],n){            f[j] += f[j-p[i]] ;        }    }    // 这样还保证了 y= a + b + c + ...  a、b、c是单调不递减的 因此不会有重复的问题    cout &lt;&lt; f[n] ;}
+
+树型dp输入点数为N一棵树求树上长度恰好为K的路径个数f[i][j]表示以i为根出发i的子树到i距离为j的路径数然后 统计本节点子树到另一子树的距离为k的路径数给答案 
+void dfs(int x,int fa){    dp[x][0]=1;    for(int i=Head[x];i;i=Next[i]){        int y=To[i];        if(y==fa)continue;        dfs(y,x);        For(j,1,k) dp[x][j]+=dp[y][j-1];    }    ans += dp[x][k];    int res = 0;    for(int i=Head[x];i;i=Next[i]){        int y=To[i];        if(y==fa)continue;        For(j,1,k-1)        res += (dp[x][j]-dp[y][j-1])*dp[y][k-j-1];    }    ans += res&gt;&gt;1;}]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Learning</tag>
+        <tag>Summary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jpppp的学习总结 .week6-7</title>
+    <url>/2025/04/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/week6/</url>
+    <content><![CDATA[2025.3.31 - 2025.4.14
+
+
+生日礼物/构造
+要求一个为n的排列，满足 是13的倍数 若不存在就输出-1
+
+要从13的倍数思考究竟如何构造
+考虑到5的全排列  发现  中可以满足%13 从0到12所有情况 那么5往后的排列就顺序排就ok了 只需让前五个的排列的模数和后面的互补就好了
+
+Matrix Repair/模拟n*m的01矩阵有一些部分位置未知 为-1给定了每行每列的xor校验和 询问能否还原出矩阵 以及其是否唯一分为行和列的两种操作每次查询该行/列是否有唯一一个-1 有的话将其正确值求出行操作完列操作 列操作完行操作 就okk了^^如果有剩余形如
+1xx  x0x1xx  110001  x0x
+这样的 就说明答案并不唯一
+bool R(){    bool f=0;    For(i,1,n){        int cnt=0,hh=0,hm=0;;        For(j,1,n){            int x=a[i][j];            if(x==-1){                hm++;                hh=j;            }            if(x==1)cnt++;        }        cnt%=2;        if(hm==1){            a[i][hh] = (cnt xor r[i]);            f=1;        }    }    return f;}bool C(){    bool f=0;    For(j,1,n){        int cnt=0,hh=0,hm=0;        For(i,1,n){            int x=a[i][j];            if(x==-1){                hm++;                hh=i;            }            if(x==1)cnt++;        }        cnt%=2;        if(hm==1){            a[hh][j] = (cnt xor c[j]);            f=1;        }    }    return f;}void solve(){    cin&gt;&gt;n;int cnt;    For(i,1,n)For(j,1,n)cin&gt;&gt;a[i][j];    For(i,1,n)cin&gt;&gt;r[i];    For(i,1,n)cin&gt;&gt;c[i];    while(R()){        C();    }    while(C()){        R();    }    For(i,1,n){        For(j,1,n)if(a[i][j]==-1){            cout&lt;&lt;"-1";return ;        }    }    For(i,1,n){        For(j,1,n)cout&lt;&lt;a[i][j]&lt;&lt;' ';        cout&lt;&lt;"\n";    }    return ;}
+
+卡特兰数考虑括号种类k 实际就是乘上然后先不乘这个 我们考虑一种括号的匹配数 可以手玩几个发现它是卡特兰数（通项： 递推式： 
+但是 赛后就要总结常见的卡特兰数
+
+进出栈序列n 个元素进栈序列为：1，2，3，4，…，n，则有多少种出栈序列。把入栈看做+1 出栈看做-1 因此就变成2n个元素的-1/+1序列 满足前缀和大于等于0 并且 +1 的数量 等于 -1 的数量。好的这就是
+
+括号序列n 对括号，则有多少种 “括号匹配” 的括号序列左括号看成 +1，右括号看成 -1，那么就和上题的进出栈一样
+
+二叉树n + 1 个叶子节点能够构成多少种形状不同的（国际）满二叉树（国际）满二叉树定义：如果一棵二叉树的结点要么是叶子结点，要么它有两个子结点，这样的树就是满二叉树。使用深度优先搜索这个满二叉树，向左扩展时标记为 +1，向右扩展时标记为 -1。思路由于每个非叶子节点都有两个左右子节点，所有它必然会先向左扩展，再向右扩展。总体下来，左右扩展将会形成匹配，即变成进出栈的题型。 n+1个叶子结点会有2n次扩展
+
+电影购票电影票一张 50 coin，且售票厅没有 coin。m 个人各自持有 50 coin，n 个人各自持有 100 coin。则有多少种排队方式，可以让每个人都买到电影票。思路每个持有 100 coin 的人都需要和一个持有 50 coin 的人进行匹配。我们将持有 50 coin 的标记为 +1，持有 100 coin 的标记为 -1， 又回到了进出栈问题。
+
+
+回文串/dp回文词是一种对称的字符串。任意给定一个字符串，通过插入若干字符，都可以变成回文词。此题的任务是，求出将给定字符串变成回文词所需要插入的最少字符数。
+很巧妙的一题
+设原字符串是A，B为A的翻转我们思考A中原本回文的部分在B中这部分依然是回文的那么A、B的最长公共子序列就是字符串不变的回文部分那么 n-f[n] 就是字符串变成回文词所需要插入的最少字符数
+#include &lt;bits/stdc++.h&gt;#include &lt;cstdlib&gt;#define For(i,a,b) for(int i=a;i&lt;=b;++i)#define foR(i,a,b) for(int i=a;i&gt;=b;--i)using namespace std;const int N=2027;int n,f[N][N],v[N],sum[N];string a,b;int main(){    ios::sync_with_stdio(0);    cin.tie(0),cout.tie(0);    cin&gt;&gt;a; b=a;    n=a.size();    reverse(b.begin(),b.end());    a='!'+a;b='!'+b;    For(i,1,n){        For(j,1,n){            if(a[i]==b[j])            f[i][j]=f[i-1][j-1]+1;            else f[i][j] = max(f[i-1][j],f[i][j-1]);        }    }    cout&lt;&lt;n-f[n][n];    return 0;}]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Learning</tag>
+        <tag>Summary</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Anniversary, Nurture, and Life</title>
-    <url>/2026/04/23/nurture/</url>
+    <url>/2026/04/23/%E6%96%87%E5%AD%97/nurture/</url>
     <content><![CDATA[在某个炎热的午休，不记得空调是否断电，我蜷缩着身体在那间逼仄的、挤满了课桌与装书的箱子的狭小教室的后排角落，恶补着课上听不懂的化学，戴着蓝牙耳机，用诺基亚播放着下载到储存卡里的nurture——我不会想到转瞬已是当下。
 
 
@@ -12,6 +160,9 @@
 2026.4.23 Nurture五周年
 
 ]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
       <tags>
         <tag>Music</tag>
         <tag>Daily</tag>
@@ -19,27 +170,12 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2025/03/10/hello-world/</url>
-    <content><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
-
-More info: Writing
-Run server$ hexo server
-
-More info: Server
-Generate static files$ hexo generate
-
-More info: Generating
-Deploy to remote sites$ hexo deploy
-
-More info: Deployment
-]]></content>
-  </entry>
-  <entry>
     <title>The First Blog</title>
-    <url>/2025/03/10/The-First-Blog/</url>
+    <url>/2025/03/10/%E6%B5%8B%E8%AF%95/The-First-Blog/</url>
     <content><![CDATA[The First BlogHello!I’m J:P
 ]]></content>
+      <categories>
+        <category>test</category>
+      </categories>
   </entry>
 </search>
