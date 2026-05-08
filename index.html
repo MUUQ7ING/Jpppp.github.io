@@ -324,10 +324,22 @@ mjx-container[display="true"] + br {
         .home-article-sticky-label {
             backdrop-filter: none !important;
         }
+        .banner-media-scaled {
+            width: 75vw;
+            height: 75vh;
+            object-fit: contain;
+        }
+        @media (max-width: 768px) {
+            .banner-media-scaled {
+                width: 100vw;
+                height: 100vh;
+                object-fit: cover;
+            }
+        }
     </style>
     <div class="home-banner-background transition-fade fixed top-0 left-0 w-screen h-screen box-border will-change-transform bg-white dark:bg-black flex justify-center items-center">
         
-            <video src="/images/cfg/bg-animation.webm" autoplay loop muted playsinline style="width: 75vw; height: 75vh; object-fit: contain;" class="dark:hidden"></video>
+            <video src="/images/cfg/bg-animation.webm" autoplay loop muted playsinline class="banner-media-scaled dark:hidden"></video>
         
         
             <img src="/images/cfg/bg2.png" alt="home-banner-background" class="w-full h-full object-cover hidden dark:block">
