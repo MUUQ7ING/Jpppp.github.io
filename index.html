@@ -329,12 +329,9 @@ mjx-container[display="true"] + br {
             height: 75vh;
             object-fit: contain;
         }
+        /* Remove mobile override to keep 75% scaling on all devices for this class */
         @media (max-width: 768px) {
-            .banner-media-scaled {
-                width: 100vw;
-                height: 100vh;
-                object-fit: cover;
-            }
+            /* No override here, keep 75vw/75vh */
         }
     </style>
     <div class="home-banner-background transition-fade fixed top-0 left-0 w-screen h-screen box-border will-change-transform bg-white dark:bg-black flex justify-center items-center">
@@ -346,7 +343,7 @@ mjx-container[display="true"] + br {
 
         <!-- Mobile Light -->
         
-            <video src="/images/cfg/bg-animation.webm" autoplay loop muted playsinline class="w-full h-full object-cover block sm:hidden dark:hidden"></video>
+            <video src="/images/cfg/bg-animation.webm" autoplay loop muted playsinline class="banner-media-scaled block sm:hidden dark:hidden"></video>
         
 
         <!-- PC Dark -->
