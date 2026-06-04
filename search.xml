@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Jpppp的学习总结 .week3</title>
+    <url>/2025/03/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/week3/</url>
+    <content><![CDATA[2025.3.10 - 2025.3.16
+
+
+构造的题
+
+ 对于所有的 .
+ 两两不同.
+.已知个数 需要求得未知的数我们将第三个式子进行移项 便可得：.左边共项 右边共项 再次移动 得：.左边项正，项负 分给等式左边2n个数，正项到负项从大到小设最大项为 除去这项后左边仍有n个正n个负，因为正项均比负项大，总和得到正数，再加上，因此便是比已知的2n个数都大的数，因此不同便保证了
+
+贪贪的题贪心策略就是搞一个添加值变量 每次优先去x 并且要x大的 如果都+或都x相同 就把添加值继续保留本题贪心的障碍就在 如果前面是+ x 后面是x + 那还能不能那样贪心
+xn +m  ^+i xj  |
+设我们左边和右边的固定人数和添加人数分别为、和、那我们贪心地先往右 我们的右边就能得到新的的添加人数那这些添加人数到时候又能往左去 
+交互的题/010101的题就是玩 搞搞每一位|1 |0 然后再相加 会产生什么结果（包括进位什么的）然后就搞出来0101010101和1010101010两种玩法 豪丸以及还学到搞交互题的优美姿势 因此贴一下代码
+int ask(int x){    cout&lt;&lt; x &lt;&lt; endl;    fflush(stdout);    int ans;    cin &gt;&gt; ans;    return ans;}int getm(){    cout &lt;&lt; "!" &lt;&lt; endl;    fflush(stdout);    int m;    cin &gt;&gt; m ;    return m ;}void Print(int m){    cout &lt;&lt; m &lt;&lt; endl;     fflush(stdout);    return ;}void solve(){    int a=0,b=0,p[33],ans=0;    memset(p,0,sizeof(p));    For( i , 1 , 30 ){        a &lt;&lt;= 1;        b &lt;&lt;= 1;        if( i % 2 ) a = a + 1;        else b = b + 1;    }    int  x = ask ( a ) ; // a=010101    int  y = ask ( b ) ; // b=101010    For( i , 1 , 30 )    {        int now = 0, o ;        o = (i%2) ? x : y ;        if( ( o &amp; (1 &lt;&lt; ( i-1 ) ) ) )  now = 1;        if( ( o &amp; (1 &lt;&lt; ( i ) ) ) )  now = now + (1&lt;&lt;1);        // printf("? %d %d\n",i, (now));        if( i == 1 )now++;        if( now == 1 ) p[i] = 0;        if( now == 2 ) p[i] = 1;        if( now == 3 ) p[i] = 2;        // cout&lt;&lt;"!!  "&lt;&lt;i&lt;&lt;"  "&lt;&lt;p[i]&lt;&lt;endl;    }    int m = getm();    For( i , 1 , 30 ){        int now = 1 &lt;&lt; ( i-1 ) ;        if( (now &amp; m) ) {            ans += ( 1 &lt;&lt; ( i ) );        }        else {            if( p[i] == 0 ) ;            if( p[i] == 1 ) ans += (1 &lt;&lt; (i-1) );            if( p[i] == 2 ) ans += (1 &lt;&lt; (i) );        }    }    Print(ans);    return ;}
+
+建图、连边、与迪杰斯特拉这种问题把每个节点乘上四种方向状态 再接着连边 就十分的优美
+周训环节A/暴力脑子太混乱一开始读不懂题面 代码写的更是壱驮矢 喜提+6吸取教训 以及要提高代码重构的能力把矢端上来罢 恶心带伙 警醒自己
+bool check(){    int q[11];    memset(q,0,sizeof(q));    if(f[a%10]||f[a/10]||f[b%10]||f[b/10]||f[c%10]||f[c/10])return 0;    For(i,0,s2.size()-1){        if(S[i]!=s1[i]&amp;&amp;s2[i]=='G')return 0;        if(S[i]==s1[i]&amp;&amp;s2[i]!='G')return 0;        q[S[i]-'0']++;    }    For(i,0,9)if(g[i]&amp;&amp;q[i]!=h[i])return 0;    For(i,0,9)if(!g[i]&amp;&amp;(q[i]&lt;h[i]))return 0;    return 1;}void solve(){    For(i,0,s2.size()-1)    if(s2[i]!='B')h[s1[i]-'0']++;    For(i,0,s2.size()-1)    if(s2[i]=='B'&amp;&amp;h[s1[i]-'0']==0)f[s1[i]-'0']=1;    For(i,0,s2.size()-1)    if(s2[i]=='B'&amp;&amp;h[s1[i]-'0']!=0)g[s1[i]-'0']=1;}
+
+M/tarjan缩点/DAG板板的看懂题面后，我们发现一个环上的学校都可以比这环上的学校好，因此可以缩成一个点缩点后是否就可以直接搞呢？我们担心会不会有类似1-&gt;2 1-&gt;3 2-&gt;4 3-&gt;4的情况然鹅 由于我们给的学校排名是每个学校都会有排名的关系，因此不会出现上面这种2和3分支的情况因此所构成的DAG 直接dfs统计排名就好惹
+赛后B/带权并查集/差分约束
+总结做题的时候思路一定要清晰脑子越乱做的越不明白 
+]]></content>
+      <categories>
+        <category>Algorithms</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Learning</tag>
+        <tag>Summary</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Jpppp的学习总结 .week4</title>
     <url>/2025/03/23/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/week4/</url>
     <content><![CDATA[2025.3.17 - 2025.3.23
@@ -38,42 +73,7 @@ signed main(){    cin&gt;&gt;n;    ss();    f[0]=1;    For(i,1,cnt){        For(
 树型dp输入点数为N一棵树求树上长度恰好为K的路径个数f[i][j]表示以i为根出发i的子树到i距离为j的路径数然后 统计本节点子树到另一子树的距离为k的路径数给答案 
 void dfs(int x,int fa){    dp[x][0]=1;    for(int i=Head[x];i;i=Next[i]){        int y=To[i];        if(y==fa)continue;        dfs(y,x);        For(j,1,k) dp[x][j]+=dp[y][j-1];    }    ans += dp[x][k];    int res = 0;    for(int i=Head[x];i;i=Next[i]){        int y=To[i];        if(y==fa)continue;        For(j,1,k-1)        res += (dp[x][j]-dp[y][j-1])*dp[y][k-j-1];    }    ans += res&gt;&gt;1;}]]></content>
       <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>Algorithm</tag>
-        <tag>Learning</tag>
-        <tag>Summary</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jpppp的学习总结 .week3</title>
-    <url>/2025/03/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/week3/</url>
-    <content><![CDATA[2025.3.10 - 2025.3.16
-
-
-构造的题
-
- 对于所有的 .
- 两两不同.
-.已知个数 需要求得未知的数我们将第三个式子进行移项 便可得：.左边共项 右边共项 再次移动 得：.左边项正，项负 分给等式左边2n个数，正项到负项从大到小设最大项为 除去这项后左边仍有n个正n个负，因为正项均比负项大，总和得到正数，再加上，因此便是比已知的2n个数都大的数，因此不同便保证了
-
-贪贪的题贪心策略就是搞一个添加值变量 每次优先去x 并且要x大的 如果都+或都x相同 就把添加值继续保留本题贪心的障碍就在 如果前面是+ x 后面是x + 那还能不能那样贪心
-xn +m  ^+i xj  |
-设我们左边和右边的固定人数和添加人数分别为、和、那我们贪心地先往右 我们的右边就能得到新的的添加人数那这些添加人数到时候又能往左去 
-交互的题/010101的题就是玩 搞搞每一位|1 |0 然后再相加 会产生什么结果（包括进位什么的）然后就搞出来0101010101和1010101010两种玩法 豪丸以及还学到搞交互题的优美姿势 因此贴一下代码
-int ask(int x){    cout&lt;&lt; x &lt;&lt; endl;    fflush(stdout);    int ans;    cin &gt;&gt; ans;    return ans;}int getm(){    cout &lt;&lt; "!" &lt;&lt; endl;    fflush(stdout);    int m;    cin &gt;&gt; m ;    return m ;}void Print(int m){    cout &lt;&lt; m &lt;&lt; endl;     fflush(stdout);    return ;}void solve(){    int a=0,b=0,p[33],ans=0;    memset(p,0,sizeof(p));    For( i , 1 , 30 ){        a &lt;&lt;= 1;        b &lt;&lt;= 1;        if( i % 2 ) a = a + 1;        else b = b + 1;    }    int  x = ask ( a ) ; // a=010101    int  y = ask ( b ) ; // b=101010    For( i , 1 , 30 )    {        int now = 0, o ;        o = (i%2) ? x : y ;        if( ( o &amp; (1 &lt;&lt; ( i-1 ) ) ) )  now = 1;        if( ( o &amp; (1 &lt;&lt; ( i ) ) ) )  now = now + (1&lt;&lt;1);        // printf("? %d %d\n",i, (now));        if( i == 1 )now++;        if( now == 1 ) p[i] = 0;        if( now == 2 ) p[i] = 1;        if( now == 3 ) p[i] = 2;        // cout&lt;&lt;"!!  "&lt;&lt;i&lt;&lt;"  "&lt;&lt;p[i]&lt;&lt;endl;    }    int m = getm();    For( i , 1 , 30 ){        int now = 1 &lt;&lt; ( i-1 ) ;        if( (now &amp; m) ) {            ans += ( 1 &lt;&lt; ( i ) );        }        else {            if( p[i] == 0 ) ;            if( p[i] == 1 ) ans += (1 &lt;&lt; (i-1) );            if( p[i] == 2 ) ans += (1 &lt;&lt; (i) );        }    }    Print(ans);    return ;}
-
-建图、连边、与迪杰斯特拉这种问题把每个节点乘上四种方向状态 再接着连边 就十分的优美
-周训环节A/暴力脑子太混乱一开始读不懂题面 代码写的更是壱驮矢 喜提+6吸取教训 以及要提高代码重构的能力把矢端上来罢 恶心带伙 警醒自己
-bool check(){    int q[11];    memset(q,0,sizeof(q));    if(f[a%10]||f[a/10]||f[b%10]||f[b/10]||f[c%10]||f[c/10])return 0;    For(i,0,s2.size()-1){        if(S[i]!=s1[i]&amp;&amp;s2[i]=='G')return 0;        if(S[i]==s1[i]&amp;&amp;s2[i]!='G')return 0;        q[S[i]-'0']++;    }    For(i,0,9)if(g[i]&amp;&amp;q[i]!=h[i])return 0;    For(i,0,9)if(!g[i]&amp;&amp;(q[i]&lt;h[i]))return 0;    return 1;}void solve(){    For(i,0,s2.size()-1)    if(s2[i]!='B')h[s1[i]-'0']++;    For(i,0,s2.size()-1)    if(s2[i]=='B'&amp;&amp;h[s1[i]-'0']==0)f[s1[i]-'0']=1;    For(i,0,s2.size()-1)    if(s2[i]=='B'&amp;&amp;h[s1[i]-'0']!=0)g[s1[i]-'0']=1;}
-
-M/tarjan缩点/DAG板板的看懂题面后，我们发现一个环上的学校都可以比这环上的学校好，因此可以缩成一个点缩点后是否就可以直接搞呢？我们担心会不会有类似1-&gt;2 1-&gt;3 2-&gt;4 3-&gt;4的情况然鹅 由于我们给的学校排名是每个学校都会有排名的关系，因此不会出现上面这种2和3分支的情况因此所构成的DAG 直接dfs统计排名就好惹
-赛后B/带权并查集/差分约束
-总结做题的时候思路一定要清晰脑子越乱做的越不明白 
-]]></content>
-      <categories>
-        <category>算法</category>
+        <category>Algorithms</category>
       </categories>
       <tags>
         <tag>Algorithm</tag>
@@ -115,7 +115,7 @@ bool R(){    bool f=0;    For(i,1,n){        int cnt=0,hh=0,hm=0;;        For(j,
 设原字符串是A，B为A的翻转我们思考A中原本回文的部分在B中这部分依然是回文的那么A、B的最长公共子序列就是字符串不变的回文部分那么 n-f[n] 就是字符串变成回文词所需要插入的最少字符数
 #include &lt;bits/stdc++.h&gt;#include &lt;cstdlib&gt;#define For(i,a,b) for(int i=a;i&lt;=b;++i)#define foR(i,a,b) for(int i=a;i&gt;=b;--i)using namespace std;const int N=2027;int n,f[N][N],v[N],sum[N];string a,b;int main(){    ios::sync_with_stdio(0);    cin.tie(0),cout.tie(0);    cin&gt;&gt;a; b=a;    n=a.size();    reverse(b.begin(),b.end());    a='!'+a;b='!'+b;    For(i,1,n){        For(j,1,n){            if(a[i]==b[j])            f[i][j]=f[i-1][j-1]+1;            else f[i][j] = max(f[i-1][j],f[i][j-1]);        }    }    cout&lt;&lt;n-f[n][n];    return 0;}]]></content>
       <categories>
-        <category>算法</category>
+        <category>Algorithms</category>
       </categories>
       <tags>
         <tag>Algorithm</tag>
@@ -140,13 +140,22 @@ div3sb题我不会放过你的没考虑直接推式子 而是用普通的循环�
 因为x尽可能小设t，使得那么t+1后 所以得到 x=t=m/(m-n+1)
 void solve(){    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;    n = (k+n-1)/n ;    // ans=n;    // int x=1;    // while(1){    //     int t=m/(x+1);    //     int now = m-t;    //     if(now &gt;= n){    //         ans=x;    //         break;    //     }    //     x=m/t;    // }    ans = (m)/(m-n+1) ;    cout&lt;&lt;ans&lt;&lt;endl;}]]></content>
       <categories>
-        <category>算法</category>
+        <category>Algorithms</category>
       </categories>
       <tags>
         <tag>Algorithm</tag>
         <tag>Learning</tag>
         <tag>Summary</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>The First Blog</title>
+    <url>/2025/03/10/%E6%B5%8B%E8%AF%95/The-First-Blog/</url>
+    <content><![CDATA[The First BlogHello!I’m J:P
+]]></content>
+      <categories>
+        <category>test</category>
+      </categories>
   </entry>
   <entry>
     <title>Anniversary, Nurture, and Life</title>
@@ -161,21 +170,12 @@ void solve(){    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;    n = (k+n-1)/n ;    // ans=n;
 
 ]]></content>
       <categories>
-        <category>杂谈</category>
+        <category>Essays</category>
       </categories>
       <tags>
         <tag>Music</tag>
         <tag>Daily</tag>
         <tag>Life</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>The First Blog</title>
-    <url>/2025/03/10/%E6%B5%8B%E8%AF%95/The-First-Blog/</url>
-    <content><![CDATA[The First BlogHello!I’m J:P
-]]></content>
-      <categories>
-        <category>test</category>
-      </categories>
   </entry>
 </search>
